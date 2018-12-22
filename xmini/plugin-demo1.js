@@ -1,20 +1,22 @@
 import PluginBase from './plugin-base';
-
 class PluginDemo extends PluginBase {
-  name = 'plugin-demo1';
+  name = 'demo1';
   events = {
     preOnShow: 'preOnShow',
     postOnShow: 'postOnShow',
     postOnHide: 'postOnHide',
   };
 
-  constructor(config) {
-    super(config);
+  constructor(pluginConfig = {}) {
+    super(pluginConfig);
   }
 
   preOnShow(e, ctx) {
     console.log('plugin-1: preOnShow');
-    console.log(e);
+    console.log(this);
+    // console.log(PluginBase.getConfig());
+    console.log(this.getConfig());
+    console.log(this.getPluginConfig());
 
     const tt = [];
     for (let i = 0; i < 100000; i++) {

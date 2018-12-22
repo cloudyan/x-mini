@@ -20,7 +20,7 @@ const pageFns = PAGE_HOOKS.reduce((obj, key) => {
 
 let inited;
 
-const core = {
+export const core = {
   getConfig() {
     return { ...config };
   },
@@ -50,7 +50,7 @@ export default function xmini(options = {}) {
           function pluginFn(event) {
             const fnName = events[event];
             const fn = plugin[fnName];
-            ev.$on(event, fn);
+            ev.$on(event, fn.bind(plugin));
           }.bind(plugin)
         );
       });

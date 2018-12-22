@@ -1,8 +1,7 @@
 import Emitter from './emitter';
-import config from './config';
-
+import { core } from './xmini';
 class PluginBase extends Emitter {
-  config = config;
+  name = 'demo1';
   constructor(pluginConfig = {}) {
     super();
     // this.config = config;
@@ -10,9 +9,16 @@ class PluginBase extends Emitter {
     // this.init(config);
     // console.log('a', this.$on);
     this.bindEvents();
+    this.getPluginConfig = function() {
+      return { ...pluginConfig };
+    };
   }
 
   bindEvents() {}
+
+  getConfig() {
+    return core.getConfig();
+  }
 }
 
 export default PluginBase;
