@@ -21,9 +21,9 @@ module.exports = {
         corejs: 2,
       },
     ],
-    '@babel/plugin-transform-classes',
     '@babel/plugin-transform-template-literals',
     '@babel/plugin-proposal-class-properties',
+    '@babel/plugin-transform-classes',
     // https://babeljs.io/docs/en/babel-plugin-proposal-export-default-from
     '@babel/plugin-proposal-export-default-from',
     // https://babeljs.io/docs/en/babel-helper-module-imports
