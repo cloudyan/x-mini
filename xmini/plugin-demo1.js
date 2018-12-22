@@ -17,6 +17,8 @@ class PluginDemo extends PluginBase {
     // console.log(PluginBase.getConfig());
     console.log(this.getConfig());
     console.log(this.getPluginConfig());
+    this.setPluginConfig({ ttt: 1 });
+    console.log(this.getPluginConfig());
 
     const tt = [];
     for (let i = 0; i < 100000; i++) {
