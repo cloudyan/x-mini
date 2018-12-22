@@ -16,6 +16,8 @@ class PluginDemo extends PluginBase {
     console.log(this);
     // console.log(PluginBase.getConfig());
     console.log(this.getConfig());
+    console.log(this.setConfig({ appName: 'edited' }));
+    console.log(this.getConfig());
     console.log(this.getPluginConfig());
     this.setPluginConfig({ ttt: 1 });
     console.log(this.getPluginConfig());
