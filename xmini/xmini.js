@@ -18,6 +18,7 @@ const pageFns = PAGE_HOOKS.reduce((obj, key) => {
 }, {});
 
 let inited;
+const xminiConfig = {};
 export default function xmini(options = {}) {
   // console.log('plugins:', plugins)
   // console.log('config:', rest);
@@ -28,10 +29,10 @@ export default function xmini(options = {}) {
       return;
     }
     if (type === 'config') {
-      if (inited) return;
+      if (inited) return inited;
       const { plugins = [], ...rest } = options;
       // this.setConfig(rest);
-      console.log('config', rest);
+      Object.assign(xminiConfig, rest);
       plugins.forEach(plugin => {
         // console.log(plugin.events);
         const { events = {} } = plugin;
@@ -43,8 +44,15 @@ export default function xmini(options = {}) {
           }.bind(plugin)
         );
       });
-      inited = true;
-      return;
+      inited = {
+        getConfig() {
+          return { ...xminiConfig };
+        },
+        setConfig(config) {
+          Object.assign(xminiConfig, config);
+        },
+      };
+      return inited;
     }
 
     // 页面调用

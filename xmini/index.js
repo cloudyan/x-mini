@@ -2,7 +2,7 @@ import xmini from './xmini';
 import PluginDemo1 from './plugin-demo1';
 import PluginDemo2 from './plugin-demo2';
 
-xmini({
+const xm = xmini({
   appId: 123,
   appName: 'test',
   plugins: [
@@ -10,6 +10,9 @@ xmini({
     new PluginDemo2({ url: 'www.baidu.com' }),
   ],
 })('config');
+
+const config = xm.getConfig();
+console.log(config);
 
 xmini({
   onShow() {
