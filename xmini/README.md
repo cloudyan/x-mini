@@ -27,6 +27,13 @@ xmini({
 
 插件
 
+关于数据配置
+
+- 每个插件要能拿到全局 xminiConfig
+- 插件的 pluginConfig 要挂载到 xminiConfig 上
+  - 是否支持全局共享，部分插件有需要，如 channel
+- 插件内的方法，要和页面的 options 打通，数据能共享，相当于执行的作用域在页面上
+
 ```js
 import xmini from '@xmini/core';
 import PluginCore from '@xmini/plugin-core';

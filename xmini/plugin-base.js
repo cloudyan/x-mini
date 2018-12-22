@@ -1,16 +1,15 @@
 import Emitter from './emitter';
+import config from './config';
 
 class PluginBase extends Emitter {
-  constructor(config = {}) {
+  config = config;
+  constructor(pluginConfig = {}) {
     super();
-    this.config = config;
+    // this.config = config;
+    this.pluginConfig = pluginConfig;
     // this.init(config);
     // console.log('a', this.$on);
     this.bindEvents();
-  }
-
-  init(config) {
-    // this.config = config;
   }
 
   bindEvents() {}
