@@ -14,6 +14,7 @@ class PluginDemo extends PluginBase {
 
   preOnShow(e, ctx) {
     console.log('plugin-1: preOnShow');
+    console.log(e);
 
     const tt = [];
     for (let i = 0; i < 100000; i++) {

@@ -1,6 +1,7 @@
 import { APP_HOOKS, PAGE_HOOKS } from './constants';
 import { App, Page } from './miniapp';
 import ev from './event';
+import config from './config';
 
 // import { isFunction } from './is';
 import { upperFirst } from './utils';
@@ -18,7 +19,16 @@ const pageFns = PAGE_HOOKS.reduce((obj, key) => {
 }, {});
 
 let inited;
-const xminiConfig = {};
+
+const core = {
+  getConfig() {
+    return { ...config };
+  },
+  setConfig(newConfig) {
+    Object.assign(config, newConfig);
+  },
+};
+
 export default function xmini(options = {}) {
   // console.log('plugins:', plugins)
   // console.log('config:', rest);
@@ -29,10 +39,10 @@ export default function xmini(options = {}) {
       return;
     }
     if (type === 'config') {
-      if (inited) return inited;
+      if (inited) return core;
       const { plugins = [], ...rest } = options;
       // this.setConfig(rest);
-      Object.assign(xminiConfig, rest);
+      core.setConfig(rest);
       plugins.forEach(plugin => {
         // console.log(plugin.events);
         const { events = {} } = plugin;
@@ -44,15 +54,8 @@ export default function xmini(options = {}) {
           }.bind(plugin)
         );
       });
-      inited = {
-        getConfig() {
-          return { ...xminiConfig };
-        },
-        setConfig(config) {
-          Object.assign(xminiConfig, config);
-        },
-      };
-      return inited;
+      inited = true;
+      return core;
     }
 
     // 页面调用
@@ -68,9 +71,10 @@ export default function xmini(options = {}) {
     hooks.forEach((key, index) => {
       const oldFn = newOpts[key] || noop;
       newOpts[key] = function(opts) {
-        ev.$emit(`pre${upperFirst(key)}`, newOpts);
+        // 这里应该使用 this 而不是 newOpts
+        ev.$emit(`pre${upperFirst(key)}`, this);
         const result = oldFn.call(this, opts);
-        ev.$emit(`post${upperFirst(key)}`, newOpts);
+        ev.$emit(`post${upperFirst(key)}`, this);
         return result;
       };
     });
