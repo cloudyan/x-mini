@@ -9,7 +9,6 @@ class PluginDemo extends PluginBase {
     super(config);
   }
 
-
   preOnShow(e, ctx) {
     console.log(e);
   }
