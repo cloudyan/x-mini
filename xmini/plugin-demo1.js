@@ -1,6 +1,7 @@
 import PluginBase from './plugin-base';
 
 class PluginDemo extends PluginBase {
+  name = 'plugin-demo1';
   events = {
     preOnShow: 'preOnShow',
     postOnShow: 'postOnShow',

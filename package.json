@@ -2,7 +2,7 @@
   "version": "0.0.0",
   "name": "proxy-example",
   "scripts": {
-    "xmini": "npx babel-node --presets @babel/preset-env ./class/xmini.js",
+    "xmini": "npx babel-node --presets @babel/preset-env ./xmini/index.js",
     "test": "jest --no-cache"
   },
   "devDependencies": {

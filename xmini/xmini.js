@@ -1,8 +1,6 @@
 import { APP_HOOKS, PAGE_HOOKS } from './constants';
 import { App, Page } from './miniapp';
 import ev from './event';
-import PluginDemo1 from './plugin-demo1';
-import PluginDemo2 from './plugin-demo2';
 
 // import { isFunction } from './is';
 import { upperFirst } from './utils';
@@ -20,7 +18,7 @@ const pageFns = PAGE_HOOKS.reduce((obj, key) => {
 }, {});
 
 let inited;
-function xmini(options = {}) {
+export default function xmini(options = {}) {
   // console.log('plugins:', plugins)
   // console.log('config:', rest);
   return type => {
@@ -72,18 +70,3 @@ function xmini(options = {}) {
     cb(newOpts);
   };
 }
-
-xmini({
-  appId: 123,
-  appName: 'test',
-  plugins: [
-    new PluginDemo1({ siteId: 2 }),
-    new PluginDemo2({ url: 'www.baidu.com' }),
-  ],
-})('config');
-
-xmini({
-  onShow() {
-    console.log('page: onShow');
-  },
-})('Page');
