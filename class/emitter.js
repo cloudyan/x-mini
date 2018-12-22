@@ -9,7 +9,7 @@
 // publish()
 
 export default class Emitter {
-  on(name, callback, context) {
+  $on(name, callback, context) {
     const e = this.e || (this.e = {});
 
     (e[name] || (e[name] = [])).push({
@@ -20,7 +20,7 @@ export default class Emitter {
     return this;
   }
 
-  once(name, callback, ctx) {
+  $once(name, callback, ctx) {
     const self = this;
     function listener() {
       self.off(name, listener);
@@ -31,7 +31,7 @@ export default class Emitter {
     return this.on(name, listener, ctx);
   }
 
-  emit(name) {
+  $emit(name) {
     const data = [].slice.call(arguments, 1);
     const evtArr = ((this.e || (this.e = {}))[name] || []).slice();
     let i = 0;
@@ -44,7 +44,7 @@ export default class Emitter {
     return this;
   }
 
-  off(name, callback) {
+  $off(name, callback) {
     const e = this.e || (this.e = {});
     const evts = e[name];
     const liveEvents = [];

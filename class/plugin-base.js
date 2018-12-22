@@ -5,6 +5,7 @@ class PluginBase extends Emitter {
     super();
     this.config = config;
     // this.init(config);
+    // console.log('a', this.$on);
     this.bindEvents();
   }
 
@@ -12,9 +13,7 @@ class PluginBase extends Emitter {
     // this.config = config;
   }
 
-  bindEvents() {
-
-  }
+  bindEvents() {}
 }
 
 export default PluginBase;

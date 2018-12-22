@@ -3,19 +3,17 @@
 // xmini(options)('App');
 // https://github.com/mqyqingfeng/Blog/issues/16
 
-
 function xmini(options) {
-  return (fnName) => {
-    console.log(this.config)
+  return fnName => {
+    console.log(this.config);
     const newOptions = { ...options };
     return fnName === 'Page' ? Page(newOptions) : App(newOptions);
   };
 }
 
-xmini.prototype.init = function (config = {}) {
+xmini.prototype.init = function(config = {}) {
   this.config = config;
-}
-
+};
 
 function App(opts) {
   opts.onLaunch();
@@ -23,7 +21,7 @@ function App(opts) {
   opts.data;
 
   opts.onShow();
-};
+}
 
 function Page(opts) {
   opts.onLoad({});
@@ -31,9 +29,7 @@ function Page(opts) {
   opts.data;
 
   opts.onShow();
-};
-
-
+}
 
 xmini({
   data: {},
@@ -44,10 +40,9 @@ xmini({
     console.log('app onShow');
   },
   onTest() {
-    console.log('app test')
+    console.log('app test');
   },
 })('App');
-
 
 xmini({
   data: {},
@@ -58,6 +53,6 @@ xmini({
     console.log('page onShow');
   },
   onTest() {
-    console.log('page test')
+    console.log('page test');
   },
 })('Page');

@@ -1,11 +1,9 @@
-
 const proxyMap = {
   App: ['onLaunch', 'onShow'],
   Page: ['onLoad', 'onShow'],
-}
+};
 
 // new xMini(config);
-
 
 // xmini(options)('App');
 
@@ -13,9 +11,8 @@ function xMini(config) {
   const { plugins, ...rest } = config;
 
   console.log('this', this);
-  return (options) => {
-    return (fnName) => {
-
+  return options => {
+    return fnName => {
       console.log('config', this);
 
       // http://es6.ruanyifeng.com/#docs/proxy
@@ -33,13 +30,13 @@ function xMini(config) {
           return Reflect.set(target, key, value, receiver);
         },
         has(target, propKey) {},
-      })
+      });
       // const newOptions =
 
       return fnName === 'Page' ? Page(newOptions) : App(newOptions);
     };
   };
-};
+}
 
 const xmini = xMini({
   appName: 'point',
@@ -58,7 +55,7 @@ function App(opts) {
   opts.data;
 
   opts.onShow();
-};
+}
 
 function Page(opts) {
   opts.onLoad({});
@@ -66,9 +63,7 @@ function Page(opts) {
   opts.data;
 
   opts.onShow();
-};
-
-
+}
 
 xmini({
   data: {},
@@ -79,10 +74,9 @@ xmini({
     console.log('app onShow');
   },
   onTest() {
-    console.log('app test')
+    console.log('app test');
   },
 })('App');
-
 
 xmini({
   data: {},
@@ -93,6 +87,6 @@ xmini({
     console.log('page onShow');
   },
   onTest() {
-    console.log('page test')
+    console.log('page test');
   },
 })('Page');
