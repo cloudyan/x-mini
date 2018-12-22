@@ -1,7 +1,11 @@
 import { APP_HOOKS, PAGE_HOOKS } from './constants';
 import { App, Page } from './miniapp';
 import ev from './event';
-import config from './config';
+
+const config = {
+  appId: '',
+  appName: '',
+};
 
 // import { isFunction } from './is';
 import { upperFirst } from './utils';
