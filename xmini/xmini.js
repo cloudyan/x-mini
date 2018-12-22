@@ -25,7 +25,7 @@ export const core = {
     return { ...config };
   },
   setConfig(newConfig) {
-    Object.assign(config, newConfig);
+    return Object.assign(config, newConfig);
   },
 };
 
