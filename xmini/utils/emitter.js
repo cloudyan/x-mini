@@ -8,7 +8,7 @@
 // unsubscribe()：取消订阅。从 subscribers 数组中删除订阅者；
 // publish()
 
-export default class Emitter {
+export class Emitter {
   $on(name, callback, context) {
     // console.log(arguments);
     const e = this.e || (this.e = {});

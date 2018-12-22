@@ -1,4 +1,4 @@
-import xmini from './xmini';
+import xmini from './core/xmini';
 import PluginDemo1 from './plugin-demo1';
 import PluginDemo2 from './plugin-demo2';
 

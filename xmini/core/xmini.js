@@ -1,14 +1,10 @@
-import { APP_HOOKS, PAGE_HOOKS } from './constants';
+import { APP_HOOKS, PAGE_HOOKS, upperFirst, emitter } from '../utils/index';
 import { App, Page } from './miniapp';
-import ev from './event';
 
 const config = {
   appId: '',
   appName: '',
 };
-
-// import { isFunction } from './is';
-import { upperFirst } from './utils';
 
 const noop = () => {};
 
@@ -54,7 +50,7 @@ export default function xmini(options = {}) {
           function pluginFn(event) {
             const fnName = events[event];
             const fn = plugin[fnName];
-            ev.$on(event, fn.bind(plugin));
+            emitter.$on(event, fn.bind(plugin));
           }.bind(plugin)
         );
       });
@@ -76,9 +72,9 @@ export default function xmini(options = {}) {
       const oldFn = newOpts[key] || noop;
       newOpts[key] = function(opts) {
         // 这里应该使用 this 而不是 newOpts
-        ev.$emit(`pre${upperFirst(key)}`, this);
+        emitter.$emit(`pre${upperFirst(key)}`, this);
         const result = oldFn.call(this, opts);
-        ev.$emit(`post${upperFirst(key)}`, this);
+        emitter.$emit(`post${upperFirst(key)}`, this);
         return result;
       };
     });

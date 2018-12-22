@@ -1,5 +1,6 @@
-import Emitter from './emitter';
+import { Emitter } from '../utils/index';
 import { core } from './xmini';
+
 class PluginBase extends Emitter {
   name = 'demo1';
   getConfig = core.getConfig;
