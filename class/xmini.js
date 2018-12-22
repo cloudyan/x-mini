@@ -1,4 +1,23 @@
-import PluginDemo from './plugin-demo';
+import { APP_HOOKS, PAGE_HOOKS } from './constants';
+import { App, Page } from './miniapp';
+import ev from './event';
+import PluginDemo1 from './plugin-demo1';
+import PluginDemo2 from './plugin-demo2';
+
+// import { isFunction } from './is';
+import { upperFirst } from './utils';
+
+const noop = () => {};
+
+const appFns = APP_HOOKS.reduce((obj, key) => {
+  // console.log(obj, key);
+  obj[key] = noop;
+  return obj;
+}, {});
+const pageFns = PAGE_HOOKS.reduce((obj, key) => {
+  obj[key] = noop;
+  return obj;
+}, {});
 
 let inited;
 function xmini(options = {}) {
@@ -16,31 +35,55 @@ function xmini(options = {}) {
       // this.setConfig(rest);
       console.log('config', rest);
       plugins.forEach(plugin => {
-        console.log(plugin.events);
+        // console.log(plugin.events);
         const { events = {} } = plugin;
         Object.keys(events).forEach(
           function pluginFn(event) {
             const fnName = events[event];
             const fn = plugin[fnName];
-            this.$on(event, fn);
+            ev.$on(event, fn);
           }.bind(plugin)
         );
       });
       inited = true;
+      return;
     }
 
     // 页面调用
+    const isPage = type !== 'App';
+    const cb = isPage ? Page : App;
+    const hooks = isPage ? PAGE_HOOKS : APP_HOOKS;
+    const hooksFn = isPage ? pageFns : appFns;
+
+    // 如果 options 没实现的方法，这里补上
+    const newOpts = { ...hooksFn, ...options };
+    // 只添加生命周期的 还是全加
+    // Object.keys(newOpts).forEach((key, index) => {
+    hooks.forEach((key, index) => {
+      const oldFn = newOpts[key] || noop;
+      newOpts[key] = function(opts) {
+        ev.$emit(`pre${upperFirst(key)}`, newOpts);
+        const result = oldFn.call(this, opts);
+        ev.$emit(`post${upperFirst(key)}`, newOpts);
+        return result;
+      };
+    });
+
+    cb(newOpts);
   };
 }
 
 xmini({
   appId: 123,
   appName: 'test',
-  plugins: [new PluginDemo({ siteId: 2 })],
+  plugins: [
+    new PluginDemo1({ siteId: 2 }),
+    new PluginDemo2({ url: 'www.baidu.com' }),
+  ],
 })('config');
 
 xmini({
   onShow() {
-    console.log('onShow');
+    console.log('page: onShow');
   },
 })('Page');

@@ -10,6 +10,7 @@
 
 export default class Emitter {
   $on(name, callback, context) {
+    // console.log(arguments);
     const e = this.e || (this.e = {});
 
     (e[name] || (e[name] = [])).push({
@@ -32,6 +33,7 @@ export default class Emitter {
   }
 
   $emit(name) {
+    // console.log(arguments);
     const data = [].slice.call(arguments, 1);
     const evtArr = ((this.e || (this.e = {}))[name] || []).slice();
     let i = 0;

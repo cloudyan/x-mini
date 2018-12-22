@@ -3,6 +3,7 @@ import PluginBase from './plugin-base';
 class PluginDemo extends PluginBase {
   events = {
     preOnShow: 'preOnShow',
+    postOnHide: 'postOnHide',
   };
 
   constructor(config) {
@@ -10,7 +11,11 @@ class PluginDemo extends PluginBase {
   }
 
   preOnShow(e, ctx) {
-    console.log(e);
+    console.log('plugin-2: preOnShow');
+  }
+
+  postOnHide(e, ctx) {
+    // console.log('e', e);
   }
 }
 
