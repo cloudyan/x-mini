@@ -19,7 +19,7 @@ const pageFns = PAGE_HOOKS.reduce((obj, key) => {
 export default class XMini extends Core {
   constructor(config = {}) {
     const { plugins = [], ...rest } = config;
-    super(rest);
+    super(rest, true);
     this.plugin = {};
     this.addPlugin(plugins);
     rest.plugin = this.plugin;
@@ -32,6 +32,7 @@ export default class XMini extends Core {
       });
     } else {
       const { events = {} } = plugin;
+      // 组件内怎样获取全局配置
       // Object.assign(plugin, {
       //   getGlobalConfig: this.getConfig.bind(this),
       //   setGlobalConfig: this.setConfig.bind(this),

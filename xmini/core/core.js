@@ -1,19 +1,7 @@
 export default class Core {
-  constructor(config = {}, type = 'plugin') {
+  constructor(config = {}) {
     this.config = config;
-    // if (type === 'plugin') {
-    //   this._config = config;
-    // } else {
-    //   this._pluginConfig = config;
-    // }
   }
-
-  // get config(bool) {
-  //   return { ...(!bool ? this._pluginConfig : this._config) };
-  // }
-  // set config() {
-  //   return Object.assign({!bool ? this._pluginConfig : this._config),  });
-  // }
 
   getConfig() {
     return { ...this.config };
