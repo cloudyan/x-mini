@@ -3,24 +3,24 @@ import PluginBase from './core/plugin-base';
 class PluginDemo extends PluginBase {
   name = 'demo1';
   events = {
-    preOnShow: 'preOnShow',
-    postOnShow: 'postOnShow',
-    postOnHide: 'postOnHide',
+    prePageOnShow: 'preOnShow',
+    postPageOnShow: 'postOnShow',
+    postPageOnHide: 'postOnHide',
   };
 
-  constructor(pluginConfig = {}) {
-    super(pluginConfig);
+  constructor(config) {
+    super(config);
   }
 
   preOnShow(e, ctx) {
     console.log('plugin-1: preOnShow');
     // console.log(this);
     // console.log(PluginBase.getConfig());
-    console.log(this.getConfig());
-    console.log(this.setConfig({ appName: 'edited' }));
+    console.log('get:', this.getConfig());
+    console.log('set:', this.setConfig({ appName: 'edited' }));
     // console.log(this.getConfig());
-    console.log(this.getPluginConfig());
-    console.log(this.setPluginConfig({ ttt: 1 }));
+    // console.log(this.getPluginConfig());
+    // console.log(this.setPluginConfig({ ttt: 1 }));
 
     const tt = [];
     for (let i = 0; i < 100000; i++) {

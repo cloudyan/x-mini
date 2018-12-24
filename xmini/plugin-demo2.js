@@ -3,12 +3,12 @@ import PluginBase from './core/plugin-base';
 class PluginDemo extends PluginBase {
   name = 'demo2';
   events = {
-    preOnShow: 'preOnShow',
-    postOnHide: 'postOnHide',
+    prePageOnShow: 'preOnShow',
+    postPageOnHide: 'postOnHide',
   };
 
-  constructor(pluginConfig = {}) {
-    super(pluginConfig);
+  constructor(config) {
+    super(config);
   }
 
   preOnShow(e, ctx) {

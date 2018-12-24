@@ -35,9 +35,10 @@ xmini({
 - 插件内的方法，要和页面的 options 打通，数据能共享，相当于执行的作用域在页面上
 
 ```js
-import xmini from '@xmini/core';
+import XMini from '@xmini/xmini';
 import PluginCore from '@xmini/plugin-core';
 
+// 插件
 export default class PluginDemo1 extends PluginCore {
   name = 'plugin-demo1';
   events = {

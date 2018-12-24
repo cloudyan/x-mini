@@ -1,4 +1,9 @@
 export function App(opts) {
+  const err = {
+    err: 'xxx',
+    message: '错误消息',
+  };
+  opts.onError(err);
   opts.onLaunch();
 
   // opts.data;

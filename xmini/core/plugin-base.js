@@ -1,26 +1,14 @@
-import { Emitter } from '../utils/index';
-import { core } from './xmini';
+// import { Emitter } from '../utils/index';
+import Core from './core';
 
-class PluginBase extends Emitter {
-  name = 'demo1';
-  getConfig = core.getConfig;
-  setConfig = core.setConfig;
-  constructor(pluginConfig = {}) {
-    super();
-    // this.config = config;
-    this.pluginConfig = pluginConfig;
-    // this.init(config);
-    // console.log('a', this.$on);
-    this.bindEvents();
-    this.getPluginConfig = function() {
-      return { ...pluginConfig };
-    };
-    this.setPluginConfig = function(config) {
-      return Object.assign(this.pluginConfig, config);
-    };
+class PluginBase extends Core {
+  name = 'base';
+  constructor(config) {
+    super(config);
+    // this.bindEvents();
   }
 
-  bindEvents() {}
+  // bindEvents() {}
 
   // getConfig() {
   //   return core.getConfig();

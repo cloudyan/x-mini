@@ -1,21 +1,31 @@
-import xmini from './core/xmini';
+import XMini from './core/xmini';
 import PluginDemo1 from './plugin-demo1';
 import PluginDemo2 from './plugin-demo2';
+import PluginErrorReport from './plugin-error-report';
 
-const xm = xmini({
+const xmini = new XMini({
   appId: 123,
   appName: 'test',
   plugins: [
     new PluginDemo1({ siteId: 2 }),
     new PluginDemo2({ url: 'www.baidu.com' }),
+    new PluginErrorReport({ reportURI: 'https://tongji.doweidu.com/log.php' }),
   ],
-})('config');
+});
 
-const config = xm.getConfig();
-console.log(config);
+console.log(xmini.xApp);
+const { xApp, xPage } = xmini;
+// console.log(xmini.prototype);
+// console.log(xmini.test());
 
-xmini({
+xApp({
   onShow() {
     console.log('page: onShow');
   },
-})('Page');
+});
+
+xPage({
+  onShow() {
+    console.log('page: onShow');
+  },
+});
