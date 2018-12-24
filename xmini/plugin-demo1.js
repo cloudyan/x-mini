@@ -14,7 +14,7 @@ class PluginDemo extends PluginBase {
 
   preOnShow(e, ctx) {
     console.log('plugin-1: preOnShow');
-    console.log(this);
+    // console.log(this);
     // console.log(PluginBase.getConfig());
     console.log(this.getConfig());
     console.log(this.setConfig({ appName: 'edited' }));
