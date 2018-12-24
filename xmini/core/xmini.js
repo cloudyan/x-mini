@@ -1,6 +1,5 @@
 import { APP_HOOKS, PAGE_HOOKS, upperFirst, emitter } from '../utils/index';
 import Core from './core';
-import { App, Page } from './miniapp';
 
 const noop = () => {};
 
@@ -18,11 +17,14 @@ const pageFns = PAGE_HOOKS.reduce((obj, key) => {
 // XMini 在此基础上扩展
 export default class XMini extends Core {
   constructor(config = {}) {
-    const { plugins = [], ...rest } = config;
+    const { plugins = [], me, App, Page, ...rest } = config;
     super(rest, true);
+    this.me = me;
+    this.App = App;
+    this.Page = Page;
     this.plugin = {};
     this.addPlugin(plugins);
-    rest.plugin = this.plugin;
+    // rest.plugin = this.plugin;
   }
 
   addPlugin(plugin) {
@@ -75,7 +77,7 @@ export default class XMini extends Core {
   xApp = options => {
     this.create(options, {
       type: 'App',
-      cb: App,
+      cb: this.App,
       hooks: APP_HOOKS,
       hooksFn: appFns,
     });
@@ -83,7 +85,7 @@ export default class XMini extends Core {
   xPage = options => {
     this.create(options, {
       type: 'Page',
-      cb: Page,
+      cb: this.Page,
       hooks: PAGE_HOOKS,
       hooksFn: pageFns,
     });

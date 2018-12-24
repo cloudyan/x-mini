@@ -1,4 +1,5 @@
 import XMini from './core/xmini';
+import { App, Page } from './miniapp';
 import PluginDemo1 from './plugin-demo1';
 import PluginDemo2 from './plugin-demo2';
 import PluginErrorReport from './plugin-error-report';
@@ -6,6 +7,9 @@ import PluginErrorReport from './plugin-error-report';
 const xmini = new XMini({
   appId: 123,
   appName: 'test',
+  me: {},
+  App,
+  Page,
   plugins: [
     new PluginDemo1({ siteId: 2 }),
     new PluginDemo2({ url: 'www.baidu.com' }),
