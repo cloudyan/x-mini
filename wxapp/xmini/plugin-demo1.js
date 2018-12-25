@@ -14,6 +14,7 @@ class PluginDemo extends PluginBase {
 
   preOnShow(e, ctx) {
     console.log('plugin-1: preOnShow');
+    console.log('xxx', this.getGlobalConfig());
     // console.log(this);
     // console.log(PluginBase.getConfig());
     console.log('get:', this.getConfig());

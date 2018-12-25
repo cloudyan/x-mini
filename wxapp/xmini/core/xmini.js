@@ -27,7 +27,13 @@ export default class XMini extends Core {
     this.Page = Page;
     this.plugin = {};
     this.addPlugin(plugins);
-    // rest.plugin = this.plugin;
+    rest.plugin = this.plugin;
+    this.__proto__.getGlobalConfig = () => {
+      return this.getConfig();
+    };
+    this.__proto__.setGlobalConfig = opts => {
+      return this.setConfig(opts);
+    };
   }
 
   addPlugin(plugin) {

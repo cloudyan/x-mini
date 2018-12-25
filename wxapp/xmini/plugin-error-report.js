@@ -3,7 +3,7 @@ import PluginBase from './core/plugin-base';
 
 // https://tongji.doweidu.com/log.php
 
-class PluginDemo extends PluginBase {
+class Plugin extends PluginBase {
   name = 'error-report';
   events = {
     preAppOnError: 'preOnError',
@@ -39,6 +39,7 @@ class PluginDemo extends PluginBase {
     //   complete: function(res) {},
     // });
   }
+  preAppOnShow() {}
 }
 
-export default PluginDemo;
+export default Plugin;

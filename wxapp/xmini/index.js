@@ -17,6 +17,8 @@ const xmini = new XMini({
   ],
 });
 
+console.log(xmini.getGlobalConfig());
+
 export default xmini;
 
 export const xApp = xmini.xApp;
