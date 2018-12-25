@@ -11,20 +11,22 @@ export default class Core {
   }
 
   getConfig() {
-    console.log('plugin config:');
+    console.warn('set plugin config:');
     return { ...this.config };
   }
 
   setConfig(newConfig = {}) {
+    console.warn('set plugin config:');
     return Object.assign(this.config, newConfig);
   }
 
   getGlobalConfig() {
-    console.log('global config:');
+    console.warn('set global config:');
     return { ...globalConfig };
   }
 
   setGlobalConfig(newConfig = {}) {
+    console.warn('set global config:');
     return Object.assign(globalConfig, newConfig);
   }
 }

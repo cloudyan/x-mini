@@ -18,6 +18,12 @@ const pageFns = PAGE_HOOKS.reduce((obj, key) => {
 export default class XMini extends Core {
   constructor(config = {}) {
     const { plugins = [], me, App, Page, ...rest } = config;
+    rest.plugin = {};
+    rest.fn = {
+      me,
+      App,
+      Page,
+    };
     super(rest, true);
     if (!(me && App && Page)) {
       console.error('必须传入小程序的基础方法');
@@ -25,15 +31,8 @@ export default class XMini extends Core {
     this.me = me;
     this.App = App;
     this.Page = Page;
-    this.plugin = {};
+    this.plugin = rest.plugin;
     this.addPlugin(plugins);
-    rest.plugin = this.plugin;
-    this.__proto__.getGlobalConfig = () => {
-      return this.getConfig();
-    };
-    this.__proto__.setGlobalConfig = opts => {
-      return this.setConfig(opts);
-    };
   }
 
   addPlugin(plugin) {
@@ -54,7 +53,7 @@ export default class XMini extends Core {
         emitter.$on(event, fn.bind(plugin));
       });
       this.plugin[plugin.name] = plugin;
-      console.log(`add plugin: ${plugin.name}`);
+      console.log(`:::add plugin::: ${plugin.name}`);
     }
   }
 
