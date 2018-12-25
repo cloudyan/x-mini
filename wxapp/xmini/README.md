@@ -3,6 +3,7 @@
 配置及使用
 
 ```js
+// 改为类
 import xmini from '@xmini/core';
 
 xmini({

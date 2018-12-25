@@ -1,5 +1,5 @@
 import XMini from './core/xmini';
-// import { App, Page } from './miniapp';
+// import { App, Page } from './utils/mockMini';
 import PluginDemo1 from './plugin-demo1';
 import PluginDemo2 from './plugin-demo2';
 import PluginErrorReport from './plugin-error-report';

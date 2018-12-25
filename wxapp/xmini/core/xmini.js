@@ -13,12 +13,15 @@ const pageFns = PAGE_HOOKS.reduce((obj, key) => {
   return obj;
 }, {});
 
-// Core 加入必备插件，如 wxapp aliapp config支持 addPlugin 等
+// Core 加入必备功能或插件，如 wxapp aliapp config支持 addPlugin 等
 // XMini 在此基础上扩展
 export default class XMini extends Core {
   constructor(config = {}) {
     const { plugins = [], me, App, Page, ...rest } = config;
     super(rest, true);
+    if (!(me && App && Page)) {
+      console.error('必须传入小程序的基础方法');
+    }
     this.me = me;
     this.App = App;
     this.Page = Page;

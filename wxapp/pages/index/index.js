@@ -4,11 +4,11 @@ import { xPage } from '../../xmini/index';
 xPage({
   data: {},
   onLoad: function(options) {
-    console.log('page onLoad');
+    console.log('page index: onLoad');
   },
   onReady: function() {},
   onShow: function() {
-    console.log('page onShow');
+    console.log('page index: onShow');
   },
   onHide: function() {},
   onUnload: function() {},
