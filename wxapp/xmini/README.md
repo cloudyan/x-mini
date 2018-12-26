@@ -2,29 +2,26 @@
 
 配置及使用
 
-```js
-// 改为类
-import xmini from '@xmini/core';
+- const xmini = new Core();
+  - 使用单例 xmini
+  - 实现管理插件，生命周期，配置，通信；
+  - 暴露添加插件，暴露全局配置；
+  - 提供给插件调用注册公开方法
+    - 提供一个公共方法来调用这些注册的方法（是唯一的） 例如 xxx.call('getChannelInfo', callback);
+    - 注册的方法不唯一时，提供映射关系绑定
+- class Plugin extends PluginBase;
+  - 实现调用 core 注册方法，注册自己的公开方法
+  - 实现自己的生命周期，配置
+  - 实现具体功能
 
-xmini({
+core.init({
   appId: '',
-  appName: '',
   plugins: [
-    new PluginDemo1({}),
-    new PluginDemo2({}),
+    xxx,
   ],
-})('config');
+})
 
-xmini({
-  onLaunch() {},
-  onShow() {},
-})('App');
-
-xmini({
-  onLoad() {},
-  onShow() {},
-})('Page');
-```
+core.getConfig()
 
 插件
 

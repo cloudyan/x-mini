@@ -2,6 +2,7 @@ import PluginBase from './core/plugin-base';
 // import xmini from './core/xmini';
 
 // https://tongji.doweidu.com/log.php
+import { me } from 'xxx';
 
 class PluginDemo extends PluginBase {
   name = 'error-report';
@@ -25,6 +26,8 @@ class PluginDemo extends PluginBase {
     // console.log(this.getGlobalConfig());
     console.log(this.getConfig());
     // 错误上报
+    // this.$fn.me
+    // me.request
     // console.log({
     //   url: pluginConfig.reportURI,
     //   method: 'POST',

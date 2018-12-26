@@ -42,17 +42,14 @@ export default class XMini extends Core {
       });
     } else {
       const { events = {} } = plugin;
-      // 组件内怎样获取全局配置
-      // Object.assign(plugin, {
-      //   getGlobalConfig: this.getConfig.bind(this),
-      //   setGlobalConfig: this.setConfig.bind(this),
-      // });
       Object.keys(events).forEach(event => {
         const cbName = events[event];
         const fn = plugin[cbName];
         emitter.$on(event, fn.bind(plugin));
       });
+      // this.installPlugin(plugin);
       this.plugin[plugin.name] = plugin;
+      // plugin.$x = this;
       console.log(`:::add plugin::: ${plugin.name}`);
     }
   }

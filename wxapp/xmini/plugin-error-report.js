@@ -11,6 +11,8 @@ class Plugin extends PluginBase {
 
   constructor(config) {
     super(config);
+
+    // console.log(this);
   }
 
   preOnError(err, ctx) {
@@ -22,7 +24,7 @@ class Plugin extends PluginBase {
     // const request = xmini.getFn('request');
 
     console.log('error-report');
-    // console.log(this.getGlobalConfig());
+    console.log(this.getGlobalConfig());
     console.log(this.getConfig());
     // 错误上报
     // console.log({
