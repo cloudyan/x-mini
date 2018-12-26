@@ -23,6 +23,7 @@ module.exports = {
     ],
     '@babel/plugin-transform-template-literals',
     '@babel/plugin-proposal-class-properties',
+    '@babel/plugin-proposal-throw-expressions',
     '@babel/plugin-transform-classes',
     // https://babeljs.io/docs/en/babel-plugin-proposal-export-default-from
     '@babel/plugin-proposal-export-default-from',

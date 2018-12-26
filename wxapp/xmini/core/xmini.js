@@ -15,7 +15,7 @@ const pageFns = PAGE_HOOKS.reduce((obj, key) => {
 
 // Core 加入必备功能或插件，如 wxapp aliapp config支持 addPlugin 等
 // XMini 在此基础上扩展
-export default class XMini extends Core {
+class XMini extends Core {
   constructor(config = {}) {
     const { plugins = [], me, App, Page, ...rest } = config;
     rest.plugin = {};
@@ -45,7 +45,7 @@ export default class XMini extends Core {
       Object.keys(events).forEach(event => {
         const cbName = events[event];
         const fn = plugin[cbName];
-        emitter.$on(event, fn.bind(plugin));
+        emitter.on(event, fn.bind(plugin));
       });
       // this.installPlugin(plugin);
       this.plugin[plugin.name] = plugin;
@@ -68,9 +68,9 @@ export default class XMini extends Core {
       const oldFn = newOpts[key] || noop;
       newOpts[key] = function(opts) {
         // 这里应该使用 this 而不是 newOpts
-        emitter.$emit(`pre${type}${upperFirst(key)}`, this);
+        emitter.emit(`pre${type}${upperFirst(key)}`, this);
         const result = oldFn.call(this, opts);
-        emitter.$emit(`post${type}${upperFirst(key)}`, this);
+        emitter.emit(`post${type}${upperFirst(key)}`, this);
         return result;
       };
     });
@@ -96,6 +96,28 @@ export default class XMini extends Core {
     });
   };
 }
+
+const xmini = new XMini({});
+
+export default xmini;
+
+// usage
+import xmini from './xmini';
+
+xmini.init({});
+xmini.addPlugin();
+xmini.getConfig();
+xmini.create();
+
+// plugin-base
+class PluginCore {
+  call(...reset) {
+    xmini.call(...rest).bind(this);
+  }
+}
+  // plugin
+this.call('fnName', cb);
+this.call('fnName', cb);
 
 // export const core = {
 //   me,

@@ -19,11 +19,11 @@
 // emitter.emit('some-event', 'arg1 value', 'arg2 value', 'arg3 value');
 
 export class Emitter {
-  $on(name, callback, context) {
+  on(name, callback, context) {
     const self = this;
     if (Array.isArray(name)) {
       for (let i = 0, l = name.length; i < l; i++) {
-        self.$on(name[i], callback, context);
+        self.on(name[i], callback, context);
       }
     } else {
       const e = this._events || (this._events = {});
@@ -36,18 +36,18 @@ export class Emitter {
     return this;
   }
 
-  $once(name, callback, context) {
+  once(name, callback, context) {
     const self = this;
     function on() {
-      self.$off(name, on);
+      self.off(name, on);
       callback.apply(context, arguments);
     }
 
     on._ = callback;
-    return this.$on(name, on, context);
+    return this.on(name, on, context);
   }
 
-  $emit(name) {
+  emit(name) {
     const data = [].slice.call(arguments, 1);
     const evtArr = ((this._events || (this._events = {}))[name] || []).slice();
     let i = 0;
@@ -60,7 +60,7 @@ export class Emitter {
     return this;
   }
 
-  $off(name, callback) {
+  off(name, callback) {
     const self = this;
     const e = this._events || (this._events = {});
     // all
@@ -71,7 +71,7 @@ export class Emitter {
     // array of events
     if (Array.isArray(name)) {
       for (let i = 0, l = name.length; i < l; i++) {
-        self.$off(e[i], callback);
+        self.off(e[i], callback);
       }
       return self;
     }
@@ -96,7 +96,7 @@ export class Emitter {
   }
 }
 
-// $off(name, callback) {
+// off(name, callback) {
 //   const e = this.e || (this.e = {});
 //   const evts = e[name];
 //   const liveEvents = [];
