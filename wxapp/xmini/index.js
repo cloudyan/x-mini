@@ -8,8 +8,6 @@ const xmini = new XMini({
   appId: 123,
   appName: 'test',
   me: {},
-  App,
-  Page,
   plugins: [
     new PluginDemo1({ siteId: 2 }),
     new PluginDemo2({ url: 'www.baidu.com' }),

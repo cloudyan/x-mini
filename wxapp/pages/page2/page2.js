@@ -15,4 +15,4 @@ xPage({
   onPullDownRefresh() {},
   onReachBottom() {},
   onShareAppMessage() {},
-});
+})(Page);

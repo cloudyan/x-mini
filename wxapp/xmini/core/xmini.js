@@ -17,20 +17,10 @@ const pageFns = PAGE_HOOKS.reduce((obj, key) => {
 // XMini 在此基础上扩展
 class XMini extends Core {
   constructor(config = {}) {
-    const { plugins = [], me, App, Page, ...rest } = config;
+    const { plugins = [], ...rest } = config;
     rest.plugin = {};
-    rest.fn = {
-      me,
-      App,
-      Page,
-    };
     super(rest, true);
-    if (!(me && App && Page)) {
-      console.error('必须传入小程序的基础方法');
-    }
-    this.me = me;
-    this.App = App;
-    this.Page = Page;
+    this.me = rest.me;
     this.plugin = rest.plugin;
     this.addPlugin(plugins);
   }
@@ -80,20 +70,24 @@ class XMini extends Core {
   }
 
   xApp = options => {
-    this.create(options, {
+    return (fn) => {
+      this.create(options, {
       type: 'App',
-      cb: this.App,
+      cb: fn,
       hooks: APP_HOOKS,
       hooksFn: appFns,
-    });
+      });
+    };
   };
   xPage = options => {
-    this.create(options, {
-      type: 'Page',
-      cb: this.Page,
-      hooks: PAGE_HOOKS,
-      hooksFn: pageFns,
-    });
+    return (fn) => {
+      this.create(options, {
+        type: 'Page',
+        cb: fn,
+        hooks: PAGE_HOOKS,
+        hooksFn: pageFns,
+      });
+    };
   };
 }
 
