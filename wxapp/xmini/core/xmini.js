@@ -62,9 +62,9 @@ class XMini extends Core {
       const oldFn = newOpts[key] || noop;
       newOpts[key] = function(opts) {
         // 这里应该使用 this 而不是 newOpts
-        emitter.emit(`pre${type}${upperFirst(key)}`, this);
+        emitter.emit(`pre${type}${upperFirst(key)}`, opts);
         const result = oldFn.call(this, opts);
-        emitter.emit(`post${type}${upperFirst(key)}`, this);
+        emitter.emit(`post${type}${upperFirst(key)}`, opts);
         return result;
       };
     });

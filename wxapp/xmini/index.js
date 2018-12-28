@@ -4,6 +4,11 @@ import PluginDemo1 from './plugin-demo1';
 import PluginDemo2 from './plugin-demo2';
 import PluginErrorReport from './plugin-error-report';
 
+import wxapp from './plugin-wxapp';
+
+/* eslint no-global-assign: 0 */
+wx = wxapp.me(wx);
+
 xmini.init({
   appId: 123,
   appName: 'test',
@@ -15,7 +20,7 @@ xmini.init({
   ],
 });
 
-console.log(xmini.getGlobalConfig());
+// console.log(xmini.getConfig());
 
 export default xmini;
 
