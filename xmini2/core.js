@@ -18,6 +18,10 @@ export default class Core {
     return Object.assign(this.#config, config);
   }
 
+  init(config = {}) {
+    this.setConfig(config);
+  }
+
   // 所有方法调用，都通过调度中心处理
 }
 

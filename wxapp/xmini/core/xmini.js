@@ -97,27 +97,29 @@ class XMini extends Core {
   };
 }
 
-const xmini = new XMini({});
+export default XMini;
 
-export default xmini;
+// const xmini = new XMini({});
 
-// usage
-import xmini from './xmini';
+// export default xmini;
 
-xmini.init({});
-xmini.addPlugin();
-xmini.getConfig();
-xmini.create();
+// // usage
+// import xmini from './xmini';
 
-// plugin-base
-class PluginCore {
-  call(...reset) {
-    xmini.call(...rest).bind(this);
-  }
-}
-  // plugin
-this.call('fnName', cb);
-this.call('fnName', cb);
+// xmini.init({});
+// xmini.addPlugin();
+// xmini.getConfig();
+// xmini.create();
+
+// // plugin-base
+// class PluginCore {
+//   call(...reset) {
+//     xmini.call(...rest).bind(this);
+//   }
+// }
+//   // plugin
+// this.call('fnName', cb);
+// this.call('fnName', cb);
 
 // export const core = {
 //   me,

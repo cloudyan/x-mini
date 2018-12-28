@@ -4,25 +4,6 @@
 
 ```js
 import xmini from '@xmini/core';
-
-xmini({
-  appId: '',
-  appName: '',
-  plugins: [
-    new PluginDemo1({}),
-    new PluginDemo2({}),
-  ],
-})('config');
-
-xmini({
-  onLaunch() {},
-  onShow() {},
-})('App');
-
-xmini({
-  onLoad() {},
-  onShow() {},
-})('Page');
 ```
 
 插件
@@ -35,7 +16,7 @@ xmini({
 - 插件内的方法，要和页面的 options 打通，数据能共享，相当于执行的作用域在页面上
 
 ```js
-import XMini from '@xmini/xmini';
+import xmini from '@xmini/xmini';
 import PluginCore from '@xmini/plugin-core';
 
 // 插件
