@@ -1,5 +1,5 @@
 import PluginBase from './core/plugin-base';
-// import xmini from './core/xmini';
+import xmini from './core/xmini';
 
 // https://tongji.doweidu.com/log.php
 
@@ -22,24 +22,28 @@ class Plugin extends PluginBase {
     // const systemInfo = xmini.getSystemInfo('string');
     // const pluginConfig = this.getPluginConfig();
     // const request = xmini.getFn('request');
+    const pluginConfig = this.getConfig();
+    const config = xmini.getConfig();
 
     console.log('error-report');
     console.log(this.getGlobalConfig());
     console.log(this.getConfig());
+    const { httpRequest } = this.me;
     // 错误上报
-    // console.log({
-    //   url: pluginConfig.reportURI,
-    //   method: 'POST',
-    //   data: {
-    //     platform: appName,
-    //     value: JSON.stringify(err),
-    //     // systemInfo: systemInfo,
-    //   },
-    //   dataType: 'json',
-    //   success: function(res) {},
-    //   fail: function(res) {},
-    //   complete: function(res) {},
-    // });
+
+    httpRequest({
+      url: pluginConfig.reportURI,
+      method: 'POST',
+      data: {
+        platform: config.appName,
+        value: JSON.stringify(err),
+        // systemInfo: systemInfo,
+      },
+      dataType: 'json',
+      success: function(res) {},
+      fail: function(res) {},
+      complete: function(res) {},
+    });
   }
   preAppOnShow() {}
 }

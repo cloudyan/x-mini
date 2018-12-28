@@ -3,17 +3,22 @@ import xmini from './core/xmini';
 import PluginDemo1 from './plugin-demo1';
 import PluginDemo2 from './plugin-demo2';
 import PluginErrorReport from './plugin-error-report';
+import PluginChannel from './plugin-channel';
 
-import wxapp from './plugin-wxapp';
+import miniapp from './plugin-wxapp';
 
 /* eslint no-global-assign: 0 */
-wx = wxapp.me(wx);
+const me = miniapp.me(wx);
 
 xmini.init({
   appId: 123,
   appName: 'test',
-  me: wx,
+  me,
   plugins: [
+    new PluginChannel({
+      spm: 'wxapp',
+      channel: 'wxapp',
+    }),
     new PluginDemo1({ siteId: 2 }),
     new PluginDemo2({ url: 'www.baidu.com' }),
     new PluginErrorReport({ reportURI: 'https://tongji.doweidu.com/log.php' }),

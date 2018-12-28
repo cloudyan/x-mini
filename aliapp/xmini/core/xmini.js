@@ -17,9 +17,13 @@ const pageFns = PAGE_HOOKS.reduce((obj, key) => {
 // XMini 在此基础上扩展
 class XMini extends Core {
   constructor(config = {}) {
+    super(config, true);
+  }
+
+  init(config = {}) {
     const { plugins = [], ...rest } = config;
     rest.plugin = {};
-    super(rest, true);
+    this.setConfig(rest);
     this.me = rest.me;
     this.plugin = rest.plugin;
     this.addPlugin(plugins);
@@ -58,9 +62,9 @@ class XMini extends Core {
       const oldFn = newOpts[key] || noop;
       newOpts[key] = function(opts) {
         // 这里应该使用 this 而不是 newOpts
-        emitter.emit(`pre${type}${upperFirst(key)}`, this);
+        emitter.emit(`pre${type}${upperFirst(key)}`, opts);
         const result = oldFn.call(this, opts);
-        emitter.emit(`post${type}${upperFirst(key)}`, this);
+        emitter.emit(`post${type}${upperFirst(key)}`, opts);
         return result;
       };
     });
@@ -70,17 +74,17 @@ class XMini extends Core {
   }
 
   xApp = options => {
-    return (fn) => {
+    return fn => {
       this.create(options, {
-      type: 'App',
-      cb: fn,
-      hooks: APP_HOOKS,
-      hooksFn: appFns,
+        type: 'App',
+        cb: fn,
+        hooks: APP_HOOKS,
+        hooksFn: appFns,
       });
     };
   };
   xPage = options => {
-    return (fn) => {
+    return fn => {
       this.create(options, {
         type: 'Page',
         cb: fn,
@@ -91,7 +95,7 @@ class XMini extends Core {
   };
 }
 
-export default XMini;
+export default new XMini();
 
 // const xmini = new XMini({});
 

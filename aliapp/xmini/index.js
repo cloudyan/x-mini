@@ -1,21 +1,31 @@
-import XMini from './core/xmini';
+import xmini from './core/xmini';
 // import { App, Page } from './utils/mockMini';
 import PluginDemo1 from './plugin-demo1';
 import PluginDemo2 from './plugin-demo2';
 import PluginErrorReport from './plugin-error-report';
+import PluginChannel from './plugin-channel';
 
-const xmini = new XMini({
+import miniapp from './plugin-aliapp';
+
+/* eslint no-global-assign: 0 */
+const me = miniapp.me(my);
+
+xmini.init({
   appId: 123,
   appName: 'test',
-  me: {},
+  me,
   plugins: [
+    new PluginChannel({
+      spm: 'aliapp',
+      channel: 'aliapp',
+    }),
     new PluginDemo1({ siteId: 2 }),
     new PluginDemo2({ url: 'www.baidu.com' }),
     new PluginErrorReport({ reportURI: 'https://tongji.doweidu.com/log.php' }),
   ],
 });
 
-console.log(xmini.getGlobalConfig());
+// console.log(xmini.getConfig());
 
 export default xmini;
 

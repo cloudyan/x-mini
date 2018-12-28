@@ -13,7 +13,6 @@ class Core {
       this.setConfig = this.setGlobalConfig;
       this.getConfig = this.getGlobalConfig;
     }
-    // this.pluginList = {};
   }
 
   getConfig() {
