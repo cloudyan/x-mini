@@ -14,4 +14,4 @@ xPage({
     // })
     console.log('page log: onLoad');
   },
-});
+})(Page);

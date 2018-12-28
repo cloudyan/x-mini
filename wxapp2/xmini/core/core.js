@@ -1,82 +1,27 @@
-const globalConfig = {};
+// 基类
 
-// class CoreResult {
-//   handled = false;
-//   data = {};
-// }
+export default class Core {
+  // 微信小程序不支持私有属性
+  #config;
 
-class Core {
-  constructor(config = {}, isGlobal) {
-    this.config = config;
-    if (isGlobal) {
-      this.setGlobalConfig(config);
-      this.setConfig = this.setGlobalConfig;
-      this.getConfig = this.getGlobalConfig;
+  constructor(config = {}) {
+    if (new.target !== Core) {
+      return throw new Error('必须使用 new 命令生成实例');
     }
-    // this.pluginList = {};
+    this.#config = config;
   }
 
+  // 配置
   getConfig() {
-    console.warn('get plugin config:');
-    return { ...this.config };
+    return this.#config;
+  }
+  setConfig(config) {
+    return Object.assign(this.#config, config);
   }
 
-  setConfig(newConfig = {}) {
-    console.warn('set plugin config:');
-    return Object.assign(this.config, newConfig);
+  init(config = {}) {
+    this.setConfig(config);
   }
 
-  getGlobalConfig() {
-    console.warn('get global config:');
-    return { ...globalConfig };
-  }
-
-  setGlobalConfig(newConfig = {}) {
-    console.warn('set global config:');
-    return Object.assign(globalConfig, newConfig);
-  }
-
-  // installPlugin(pluginId, plugin) {
-  //   uninstallPlugin(pluginId);
-  //   this.pluginList[pluginId] = plugin;
-  //   plugin.install();
-  // }
-
-  // uninstallPlugin(pluginId) {
-  //   const temp = this.pluginList[pluginId];
-  //   if (this.pluginList[pluginId]) {
-  //     temp.uninstall();
-  //   }
-  // }
-
-  // invokeMethod(method, params) {
-  //   let list = [];
-  //   for (const core in this.pluginList) {
-  //     const result = core.invokeMethod(method, params);
-  //     if (result.handled) {
-  //       result.pluginId = core;
-  //       console.log('==========');
-  //       list.push(result);
-  //       break;
-  //     }
-  //   }
-  //   return list;
-  // }
-
-  // invoke(id, method, params) {
-  //   const plugin = this.pluginList[id];
-  //   if (!plugin) {
-  //     return {
-  //       handled: false,
-  //     };
-  //   }
-  //   return plugin.invokeMethod(method, params);
-  // }
-
-  // install() {}
-  // uninstall() {}
+  // 所有方法调用，都通过调度中心处理
 }
-
-// const core = new Core();
-
-export default Core;

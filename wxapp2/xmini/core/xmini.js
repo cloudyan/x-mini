@@ -1,6 +1,8 @@
-import { APP_HOOKS, PAGE_HOOKS, upperFirst, emitter } from '../utils/index';
 import Core from './core';
+import Core from './core';
+import { Emitter, upperFirst, APP_HOOKS, PAGE_HOOKS } from '../utils/index';
 
+const emitter = new Emitter();
 const noop = () => {};
 
 const appFns = APP_HOOKS.reduce((obj, key) => {
@@ -17,20 +19,15 @@ const pageFns = PAGE_HOOKS.reduce((obj, key) => {
 // XMini 在此基础上扩展
 class XMini extends Core {
   constructor(config = {}) {
-    const { plugins = [], me, App, Page, ...rest } = config;
+    super(config);
+  }
+
+  init(config = {}) {
+    const { plugins = [], ...rest } = config;
     rest.plugin = {};
-    rest.fn = {
-      me,
-      App,
-      Page,
-    };
-    super(rest, true);
-    if (!(me && App && Page)) {
-      console.error('必须传入小程序的基础方法');
-    }
-    this.me = me;
-    this.App = App;
-    this.Page = Page;
+    this.setConfig(rest);
+    // super(rest, true);
+    this.me = rest.me;
     this.plugin = rest.plugin;
     this.addPlugin(plugins);
   }
@@ -80,28 +77,32 @@ class XMini extends Core {
   }
 
   xApp = options => {
-    this.create(options, {
-      type: 'App',
-      cb: this.App,
-      hooks: APP_HOOKS,
-      hooksFn: appFns,
-    });
+    return fn => {
+      this.create(options, {
+        type: 'App',
+        cb: fn,
+        hooks: APP_HOOKS,
+        hooksFn: appFns,
+      });
+    };
   };
   xPage = options => {
-    this.create(options, {
-      type: 'Page',
-      cb: this.Page,
-      hooks: PAGE_HOOKS,
-      hooksFn: pageFns,
-    });
+    return fn => {
+      this.create(options, {
+        type: 'Page',
+        cb: fn,
+        hooks: PAGE_HOOKS,
+        hooksFn: pageFns,
+      });
+    };
   };
 }
 
-export default XMini;
+// export default new XMini();
 
-// const xmini = new XMini({});
+const xmini = new XMini({});
 
-// export default xmini;
+export default xmini;
 
 // // usage
 // import xmini from './xmini';

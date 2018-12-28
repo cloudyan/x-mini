@@ -7,4 +7,4 @@ xApp({
   onShow() {
     console.log(121212);
   },
-});
+})(App);
