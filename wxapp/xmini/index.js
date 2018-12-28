@@ -8,7 +8,7 @@ import PluginChannel from './plugin-channel';
 import miniapp from './plugin-wxapp';
 
 /* eslint no-global-assign: 0 */
-const me = miniapp.me(wx);
+const me = miniapp.me();
 
 xmini.init({
   appId: 123,
