@@ -22,10 +22,10 @@ class XMini extends Core {
 
   init(config = {}) {
     const { plugins = [], ...rest } = config;
-    rest.plugin = {};
+    // rest.plugin = {};
     this.setConfig(rest);
     this.me = rest.me;
-    this.plugin = rest.plugin;
+    // this.plugin = rest.plugin;
     this.addPlugin(plugins);
   }
 
@@ -35,14 +35,28 @@ class XMini extends Core {
         this.addPlugin(p);
       });
     } else {
-      const { events = {} } = plugin;
-      Object.keys(events).forEach(event => {
-        const cbName = events[event];
+      const { events = {}, methods = {} } = plugin;
+      Object.keys(events).forEach(key => {
+        const cbName = events[key];
         const fn = plugin[cbName];
-        emitter.on(event, fn.bind(plugin));
+        emitter.on(key, fn.bind(plugin));
+      });
+      Object.keys(methods).forEach(key => {
+        const fnName = methods[key];
+        if (!this[key] && plugin[key]) {
+          this[key] = function(...rest) {
+            return plugin[fnName](...rest);
+          }.bind(plugin);
+        } else {
+          console.error(
+            `${
+              plugin.name
+            } 下的公开方法 ${key} 存在冲突，请使用别名，修改对应插件的 methods 值`
+          );
+        }
       });
       // this.installPlugin(plugin);
-      this.plugin[plugin.name] = plugin;
+      // this.plugin[plugin.name] = plugin;
       // plugin.$x = this;
       console.log(`:::add plugin::: ${plugin.name}`);
     }

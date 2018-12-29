@@ -1,5 +1,5 @@
 // pages/index/index.js
-import { xPage } from '../../xmini/index';
+import { xPage, xmini } from '../../xmini/index';
 
 xPage({
   data: {},
@@ -9,6 +9,7 @@ xPage({
   onReady() {},
   onShow() {
     console.log('page index: onShow');
+    console.log(xmini.getChannel());
   },
   onHide() {},
   onUnload() {},

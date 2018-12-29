@@ -1,4 +1,4 @@
-import xmini from './core/xmini';
+import xm from './core/xmini';
 // import { App, Page } from './utils/mockMini';
 import PluginDemo1 from './plugin-demo1';
 import PluginDemo2 from './plugin-demo2';
@@ -10,7 +10,7 @@ import miniapp from './plugin-wxapp';
 /* eslint no-global-assign: 0 */
 const me = miniapp.me();
 
-xmini.init({
+xm.init({
   appId: 123,
   appName: 'test',
   me,
@@ -27,10 +27,10 @@ xmini.init({
 
 // console.log(xmini.getConfig());
 
-export default xmini;
+export const xmini = xm;
 
-export const xApp = xmini.xApp;
-export const xPage = xmini.xPage;
+export const xApp = xm.xApp;
+export const xPage = xm.xPage;
 
 // const { xApp, xPage } = xmini;
 // console.log(xmini.prototype);

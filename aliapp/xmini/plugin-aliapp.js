@@ -5,10 +5,10 @@ class Plugin extends PluginBase {
     super(...rest);
   }
 
-  me(source) {
+  me() {
     // 兼容处理微信小程序和支付宝小程序的差异
     // source.httpRequest = source.request;
-    return source;
+    return my;
   }
 }
 

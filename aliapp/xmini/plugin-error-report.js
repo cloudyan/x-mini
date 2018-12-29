@@ -28,7 +28,7 @@ class Plugin extends PluginBase {
     console.log('error-report');
     console.log(this.getGlobalConfig());
     console.log(this.getConfig());
-    const { httpRequest } = this.me;
+    const { httpRequest } = xmini.me;
     // 错误上报
 
     httpRequest({
