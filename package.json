@@ -6,7 +6,7 @@
     "test": "jest --no-cache"
   },
   "dependencies": {
-    "@jskit/qs": "0.0.7"
+    "@jskit/qs": "0.0.12"
   },
   "devDependencies": {
     "@babel/core": "^7.2.2",
@@ -20,17 +20,17 @@
     "@babel/runtime-corejs2": "^7.2.0",
     "babel-core": "7.0.0-bridge.0",
     "babel-eslint": "^10.0.1",
-    "babel-jest": "^23.6.0",
+    "babel-jest": "^24.9.0",
     "babel-plugin-add-module-exports": "^1.0.0",
-    "conventional-changelog": "3.0.5",
-    "debug": "4.1.0",
-    "eslint": "^5.9.0",
+    "conventional-changelog": "3.1.12",
+    "debug": "4.1.1",
+    "eslint": "^6.6.0",
     "eslint-config-essentials": "^1.1.1",
-    "eslint-config-prettier": "^3.3.0",
+    "eslint-config-prettier": "^6.5.0",
     "eslint-plugin-import": "^2.14.0",
-    "eslint-plugin-jest": "22.1.2",
+    "eslint-plugin-jest": "23.0.2",
     "eslint-plugin-prettier": "^3.0.0",
-    "jest": "^23.6.0",
+    "jest": "^24.9.0",
     "prettier": "^1.15.3"
   }
 }
